@@ -26,4 +26,9 @@ public class PgGroupRepositoryImpl  implements GroupRepository {
     public Optional<GroupManager> findByName(String name) {
         return jpaRepository.findByGroupName(name);
     }
+
+    @Override
+    public GroupManager save(GroupManager groupManager) {
+        return jpaRepository.save(groupManager);
+    }
 }

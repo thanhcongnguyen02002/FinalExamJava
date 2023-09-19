@@ -15,5 +15,6 @@ import java.util.function.Function;
 public interface GroupRepository  {
     List<GroupManager > findAll();
     Optional<GroupManager> findByName(String name);
+    GroupManager save(GroupManager groupManager);
 
 }

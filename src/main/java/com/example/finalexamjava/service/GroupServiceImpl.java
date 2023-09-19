@@ -1,6 +1,8 @@
 package com.example.finalexamjava.service;
 
+import com.example.finalexamjava.model.GroupExistedException;
 import com.example.finalexamjava.model.GroupManager;
+import com.example.finalexamjava.repository.ErrorCode;
 import com.example.finalexamjava.repository.GroupRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +27,14 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public Optional<GroupManager> findByName(String name) {
         return repository.findByName(name);
+    }
+
+    @Override
+    public GroupManager createGroup(GroupManager groupManager) {
+        var resutl = findByName(groupManager.getGroupName());
+        if (resutl.isPresent()){
+           throw new GroupExistedException(ErrorCode.GROUP_EXISTED,"groupname already exists ");
+        }
+        return repository.save(groupManager);
     }
 }

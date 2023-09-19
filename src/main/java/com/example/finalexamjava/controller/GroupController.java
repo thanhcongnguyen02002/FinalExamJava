@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.apache.bcel.classfile.Module;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,5 +26,9 @@ public class GroupController {
     @GetMapping("{name}")
     public Optional<GroupManager> findByName(@PathVariable String name){
         return service.findByName(name);
+    }
+    @PostMapping
+    public GroupManager create(@RequestBody GroupManager groupManager){
+        return service.createGroup(groupManager);
     }
 }
