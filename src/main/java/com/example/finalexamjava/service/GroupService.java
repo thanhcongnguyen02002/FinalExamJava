@@ -9,4 +9,6 @@ public interface GroupService {
     List<GroupManager> findAll();
     Optional<GroupManager> findByName(String name);
     GroupManager createGroup( GroupManager groupManager);
+    GroupManager findByGroupName(String name);
+    GroupManager update(String name);
 }

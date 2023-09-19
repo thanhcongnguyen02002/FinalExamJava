@@ -24,8 +24,8 @@ public class GroupController {
         return service.findAll();
     }
     @GetMapping("{name}")
-    public Optional<GroupManager> findByName(@PathVariable String name){
-        return service.findByName(name);
+    public GroupManager findByName(@PathVariable String name){
+        return service.findByGroupName(name);
     }
     @PostMapping
     public GroupManager create(@RequestBody GroupManager groupManager){
