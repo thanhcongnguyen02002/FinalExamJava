@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
+import java.util.function.Function;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -35,6 +36,10 @@ public class GroupManager {
     @LastModifiedDate
 
     OffsetDateTime updated;
+    public <R> R transform(Function<? super GroupManager, ? extends R> func) {
+        Objects.requireNonNull(func);
+        return func.apply(this);
+    }
 
     @Override
     public boolean equals(Object o) {

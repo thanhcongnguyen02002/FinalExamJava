@@ -11,9 +11,11 @@ import lombok.experimental.FieldDefaults;
 public enum ErrorCode {
 
     GROUP_NOT_FOUND(404, "GRP-001", "Group not found"),
+    USER_NOT_FOUND(404, "GRP-001", "Group not found"),
     UNAUTHORIZED(401, "ACC-002", "Unauthorized"),
     FORBIDDEN(403, "ACC-003", "Forbidden"),
     GROUP_EXISTED(409, "GRP-004", "group existed"),
+    USER_EXISTED(409, "GRP-004", "group existed"),
     INTERNAL_SERVER_ERROR(500, "SYS-001", "Internal server error");
 
     int status;

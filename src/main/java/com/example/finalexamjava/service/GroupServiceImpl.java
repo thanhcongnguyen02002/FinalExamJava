@@ -1,5 +1,6 @@
 package com.example.finalexamjava.service;
 
+import com.example.finalexamjava.controller.GroupFilter;
 import com.example.finalexamjava.model.GroupExistedException;
 import com.example.finalexamjava.model.GroupManager;
 import com.example.finalexamjava.model.GroupNotFoundException;
@@ -9,6 +10,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +21,9 @@ import java.util.Optional;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class GroupServiceImpl implements GroupService {
     GroupRepository repository;
-
-
     @Override
-    public List<GroupManager> findAll() {
-        return repository.findAll();
+    public Page<GroupManager> findAll(GroupFilter filter, Pageable pageable) {
+        return repository.findAll(filter, pageable);
     }
 
     @Override
@@ -45,20 +46,30 @@ public class GroupServiceImpl implements GroupService {
         var resutl = findByName(name);
         if ( !resutl.isPresent()) {
             throw new GroupNotFoundException(ErrorCode.GROUP_NOT_FOUND, "GroupName not found with " + name);
-
         }
         return repository.findByName(name).orElseThrow();
     }
 
     @Override
-    public GroupManager update(String name) {
-        var resutl = findByName(name);
-        if ( resutl.isPresent()) {
-            throw new GroupNotFoundException(ErrorCode.GROUP_EXISTED, "groupname already exists");
+    public GroupManager findByid(Long id) {
 
-        }
+        return  repository.findById(id)
+                .orElseThrow(() -> new GroupNotFoundException(ErrorCode.GROUP_NOT_FOUND, "group id not found with "+id));
+    }
 
-        return  null;
+    @Override
+    public GroupManager save(GroupManager groupManager) {
+        return repository.save(groupManager);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.delete(id);
+    }
+
+    @Override
+    public GroupManager update(GroupManager groupManager) {
+        return repository.save(groupManager);
     }
 }
 

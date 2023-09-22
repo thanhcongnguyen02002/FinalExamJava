@@ -3,6 +3,8 @@ server:
 
 spring:
   jpa:
+    hibernate:
+      ddl-auto: none
     database: postgresql
     show-sql: true
     properties:
@@ -20,9 +22,10 @@ spring:
     username: postgres
     password: 123456
 
-  flyway:
-    locations: classpath:db/migration
-    enabled: true
+#  flyway:
+#    locations: classpath:db/migration
+#    enabled: true
+
 
 logging.level.org.hibernate.SQL: DEBUG
 logging.level.org.hibernate.orm.jdbc.bind: TRACE

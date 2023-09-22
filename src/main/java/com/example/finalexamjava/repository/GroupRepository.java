@@ -1,5 +1,6 @@
 package com.example.finalexamjava.repository;
 
+import com.example.finalexamjava.controller.GroupFilter;
 import com.example.finalexamjava.model.GroupManager;
 import com.example.finalexamjava.repository.postgres.GroupJpaRepository;
 import org.springframework.data.domain.Example;
@@ -13,8 +14,10 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public interface GroupRepository  {
-    List<GroupManager > findAll();
+    Page<GroupManager > findAll(GroupFilter filter, Pageable pageable);
     Optional<GroupManager> findByName(String name);
     GroupManager save(GroupManager groupManager);
+    Optional<GroupManager> findById(Long id);
+    void delete(Long id);
 
 }
