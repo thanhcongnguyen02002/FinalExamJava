@@ -31,15 +31,16 @@ import java.util.Optional;
 public class GroupController {
     GroupService service;
     GroupMapper mapper;
+
     @GetMapping
     public Page<GroupResp> findAll(@ModelAttribute GroupFilter filter, Pageable pageable){
         return service.findAll(filter, pageable).map(mapper::toGroupResp);
     }
-    @GetMapping("/{name}")
+    @GetMapping("getname/{name}")
     public GroupResp findByName(@PathVariable String name){
         return service.findByGroupName(name).transform(mapper::toGroupResp);
     }
-    @GetMapping("/{id}")
+    @GetMapping("getid/{id}")
     public  GroupResp findByID(@PathVariable Long id){
         return service.findByid(id).transform(mapper::toGroupResp);
     }

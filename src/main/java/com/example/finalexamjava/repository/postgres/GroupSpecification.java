@@ -11,8 +11,16 @@ public final class GroupSpecification {
     public  static Specification<GroupManager> withFilter(GroupFilter filter){
         return Specification.where(withName(filter.groupName()))
                 .and(withMinId(filter.minId()))
-                .and(withMaxId(filter.maxId()));
+                .and(withMaxId(filter.maxId()))
+                .and(withId(filter.id()));
 
+    }
+
+    private static Specification<GroupManager> withId(Long id) {
+        if( id == null){
+            return null;
+        }
+        return  (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("id"), id);
     }
 
     private static Specification<GroupManager> withMaxId(Long maxId) {

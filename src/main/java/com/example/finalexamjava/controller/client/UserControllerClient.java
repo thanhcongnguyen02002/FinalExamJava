@@ -25,7 +25,7 @@ public class UserControllerClient {
     PasswordEncoder passwordEncoder;
     UserMapper userMapper;
     @PostMapping()
-    public UserResp create(@RequestBody UserReq req){
+    public UserResp register(@RequestBody UserReq req){
         var user= userMapper.toUser(req);
         user.setUserName(req.userName());
         user.setName(req.name());
